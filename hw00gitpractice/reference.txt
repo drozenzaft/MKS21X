@@ -1,1 +1,8 @@
-YO!
+downloading:
+	git clone (github's ssh link) - put the repo into your directory
+	git pull (something) - copy a file from the repo
+
+uploading:
+	git add (something) - posts something on in the repo
+	git commit (someting) - updates the something in git's eyes
+	git push - reuploads the repo to github
