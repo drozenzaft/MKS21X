@@ -13,4 +13,3 @@ uploading:
 	git commit (someting) - updates the something in git's eyes
 	git push - reuploads the repo to github
 
-This is some cool stuff!!!
