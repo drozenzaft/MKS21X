@@ -4,5 +4,5 @@ downloading:
 
 uploading:
 	git add (something) - posts something on in the repo
-	git commit (someting) - updates the something in git's eyes
+	git commit (something) - updates the something in git's eyes
 	git push - reuploads the repo to github
