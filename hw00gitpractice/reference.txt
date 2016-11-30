@@ -12,4 +12,5 @@ uploading:
 	git add (something) - posts something on in the repo
 	git commit (something) - updates the something in git's eyes
 	git push - reuploads the repo to github
+	git push origin master - after adding, uploads the repo to github for the first time
 
