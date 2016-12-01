@@ -33,7 +33,7 @@ public class CirculatingBook extends LibraryBook {
 	    return "Book available on shelves";
 	}
     }
-    public String toString() {
-	return super.toString() + ", " + circulationStatus();
-    }
+    /*public String toString() {
+	return super.toString();
+	}*/
 }
