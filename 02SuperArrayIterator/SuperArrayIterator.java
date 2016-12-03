@@ -1,11 +1,11 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-public class superArrayIterator implements Iterator<String> {
+public class SuperArrayIterator implements Iterator<String> {
     private int start;
-    private superArray superArray;
-    public superArrayIterator(superArray SuperArray) {
+    private SuperArray superArray;
+    public SuperArrayIterator(SuperArray superArray) {
         start = 0;
-	superArray = SuperArray;
+	this.superArray = superArray;
     }
     public String next() {
 	if (hasNext()) {
@@ -17,7 +17,7 @@ public class superArrayIterator implements Iterator<String> {
 	}
     }
     public boolean hasNext() {
-	return start < superArray.size()-1;
+	return start < superArray.size();
     }
     public void remove() {
 	throw new UnsupportedOperationException();
