@@ -18,7 +18,7 @@ public class Barcode implements Comparable<Barcode>{
       }
   }
 
-  public boolean numberString(String s) {
+  public static boolean numberString(String s) {
       for (int i = 0; i < s.length(); i++) {
 	  if (s.charAt(i) < 48 || s.charAt(i) > 57) {
 	      return false;
@@ -87,7 +87,7 @@ public class Barcode implements Comparable<Barcode>{
   public int compareTo(Barcode other){
       return (_zip+_checkDigit).compareTo(other._zip+other._checkDigit);
   }
-    /*public static void main(String[] args) {
+  /*public static void main(String[] args) {
 	Barcode a = new Barcode("10282");
 	System.out.println(a);
 	Barcode b = a.clone();
@@ -103,6 +103,6 @@ public class Barcode implements Comparable<Barcode>{
 	//Barcode e = new Barcode("143442");
 	//Barcode f = new Barcode("14");
 	//Barcode g = new Barcode("hello");
-	}*/
-	
+    }
+  */
 }
