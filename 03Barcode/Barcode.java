@@ -9,21 +9,18 @@ public class Barcode implements Comparable<Barcode>{
 //               or zip contains a non digit
 //               _zip and _checkDigit are initialized.
   public Barcode(String zip) {
-      if (zip.length() != 5) {
-	  throw new RuntimeException("Barcodes may only contain 5 numerical digits");
-      }
-      if (numberString(zip)) {
-	  _zip = zip;
-	  _checkDigit = checkSum();
+      if (zip.length() != 5 || !numberString(zip)) {
+	  throw new IllegalArgumentException("Barcodes may only contain 5 numerical digits");
       }
       else {
-	  throw new RuntimeException("Barcodes may only contain numerical digits");
+	  _zip = zip;
+	  _checkDigit = checkSum();
       }
   }
 
   public boolean numberString(String s) {
       for (int i = 0; i < s.length(); i++) {
-	  if (i < 48 || i > 57) {
+	  if (s.charAt(i) < 48 || s.charAt(i) > 57) {
 	      return false;
 	  }
       }
@@ -32,7 +29,7 @@ public class Barcode implements Comparable<Barcode>{
  	      
 // postcondition: Creates a copy of a bar code.
   public Barcode clone(){
-      Barcode barcode = new Barcode(_zip,_checkDigit);
+      Barcode barcode = new Barcode(_zip);
       return barcode;
   }
 
@@ -41,7 +38,7 @@ public class Barcode implements Comparable<Barcode>{
   private int checkSum(){
       int ans = 0;
       for (int i = 0; i < _zip.length(); i++) {
-	  ans += Integer.parseInt(_zip.charAt(i));
+	  ans += Character.getNumericValue(_zip.charAt(i));
       }
       return ans%10;
   }
@@ -50,19 +47,19 @@ public class Barcode implements Comparable<Barcode>{
 //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
   public String toString(){
       String ans = _zip + _checkDigit + "  ";
+      String ansInitialCopy = ans;
       String checkDigitString = " " + _checkDigit;
-      for (int i = 0; i < ans.length(); i++) {
-	  ans += translate(Integer.parseInt(checkDigitString.charAt(i)));
+      for (int i = 0; i < ansInitialCopy.length(); i++) {
+	  ans += translate(Character.getNumericValue(ansInitialCopy.charAt(i)));
       }
       return ans;
   }
 
   public String translate(int digit) {
-      String translation;
-      if (digit == 0) {
-	  digit = 10;
-      }
+      String translation = "";
       switch (digit) {
+      case 0:  translation = "||:::";
+	  break;
       case 1:  translation = ":::||";
 	  break;
       case 2:  translation = "::|:|";
@@ -81,8 +78,6 @@ public class Barcode implements Comparable<Barcode>{
 	  break;
       case 9:  translation = "|:|::";
 	  break;
-      case 10: translation = "||:::";
-	  break;
       }
       return translation;
   }
@@ -90,6 +85,24 @@ public class Barcode implements Comparable<Barcode>{
 
 // postcondition: compares the zip + checkdigit, in numerical order. 
   public int compareTo(Barcode other){
-      return checkDigit - other.checkDigit;
+      return (_zip+_checkDigit).compareTo(other._zip+other._checkDigit);
   }
+    /*public static void main(String[] args) {
+	Barcode a = new Barcode("10282");
+	System.out.println(a);
+	Barcode b = a.clone();
+	System.out.println(b);
+	System.out.println(a.compareTo(b));
+	Barcode c = new Barcode("01234");
+	System.out.println(c);
+	Barcode d = c.clone();
+	System.out.println(d);
+	System.out.println(c.compareTo(d));
+	System.out.println(a.compareTo(c));
+	System.out.println(c.compareTo(b));
+	//Barcode e = new Barcode("143442");
+	//Barcode f = new Barcode("14");
+	//Barcode g = new Barcode("hello");
+	}*/
+	
 }
