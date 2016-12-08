@@ -46,37 +46,36 @@ public class Barcode implements Comparable<Barcode>{
 //postcondition: format zip + check digit + Barcode 
 //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
   public String toString(){
-      String ans = _zip + _checkDigit + "  ";
+      String ans = _zip + _checkDigit + "  |";
       String ansInitialCopy = ans;
-      String checkDigitString = " " + _checkDigit;
-      for (int i = 0; i < ansInitialCopy.length(); i++) {
+      for (int i = 0; i < ansInitialCopy.length()-2; i++) {
 	  ans += translate(Character.getNumericValue(ansInitialCopy.charAt(i)));
       }
-      return ans;
+      return ans + "|";
   }
 
   public String translate(int digit) {
       String translation = "";
       switch (digit) {
-      case 0:  translation = "||:::";
+      case 0:  translation += "||:::";
 	  break;
-      case 1:  translation = ":::||";
+      case 1:  translation += ":::||";
 	  break;
-      case 2:  translation = "::|:|";
+      case 2:  translation += "::|:|";
 	  break;
-      case 3:  translation = "::||:";
+      case 3:  translation += "::||:";
 	  break;
-      case 4:  translation = ":|::|";
+      case 4:  translation += ":|::|";
 	  break;
-      case 5:  translation = ":|:|:";
+      case 5:  translation += ":|:|:";
 	  break;
-      case 6:  translation = ":||::";
+      case 6:  translation += ":||::";
 	  break;
-      case 7:  translation = "|:::|";
+      case 7:  translation += "|:::|";
 	  break;
-      case 8:  translation = "|::|:";
+      case 8:  translation += "|::|:";
 	  break;
-      case 9:  translation = "|:|::";
+      case 9:  translation += "|:|::";
 	  break;
       }
       return translation;
@@ -87,7 +86,7 @@ public class Barcode implements Comparable<Barcode>{
   public int compareTo(Barcode other){
       return (_zip+_checkDigit).compareTo(other._zip+other._checkDigit);
   }
-  /*public static void main(String[] args) {
+  public static void main(String[] args) {
 	Barcode a = new Barcode("10282");
 	System.out.println(a);
 	Barcode b = a.clone();
@@ -99,10 +98,10 @@ public class Barcode implements Comparable<Barcode>{
 	System.out.println(d);
 	System.out.println(c.compareTo(d));
 	System.out.println(a.compareTo(c));
-	System.out.println(c.compareTo(b));
+	System.out.println(c.compareTo(b));/*
 	//Barcode e = new Barcode("143442");
 	//Barcode f = new Barcode("14");
 	//Barcode g = new Barcode("hello");
+	*/
     }
-  */
 }
