@@ -9,20 +9,20 @@ public class Barcode implements Comparable<Barcode>{
 //               or zip contains a non digit
 //               _zip and _checkDigit are initialized.
   public Barcode(String zip) {
-      if (zip.length() != 5 || !numberString(zip)) {
-	  throw new IllegalArgumentException("Barcodes may only contain 5 numerical digits");
-      }
-      else {
+      boolean a = isCode(zip);
+      if (a) {
 	  _zip = zip;
 	  _checkDigit = checkSum(this);
       }
   }
 
-  private static boolean numberString(String s) {
-      for (int i = 0; i < s.length(); i++) {
-	  if (s.charAt(i) < 48 || s.charAt(i) > 57) {
-	      return false;
+  private static boolean isCode(String s) {
+      int i = 0;
+      while (i <= s.length()) {
+	  if (s.charAt(i) < 48 || s.charAt(i) > 57 || i > 5 || i < 5 && i == s.length()) {
+	      throw new IllegalArgumentException("Barcodes may only contain 5 numerical digits");
 	  }
+	  i++;
       }
       return true;
   }
@@ -46,15 +46,24 @@ public class Barcode implements Comparable<Barcode>{
 //postcondition: format zip + check digit + Barcode 
 //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
   public String toString(){
-      String ans = _zip + _checkDigit + "  |" + toZip(this) + "|";
+      String combo = _zip + _checkDigit;
+      for (int i = 0; i < _zip.length
+      String ans = combo + "  |" + toBarcode(this) + "|";
       return ans;
   }
     
-    private static String toZip(Barcode barcode) {
+    private static String toZip(String code) {
 	String ans = "";
-	String combo = barcode._zip + barcode._checkDigit;
-	for (int i = 0; i < combo.length(); i++) {
-	    ans += toBarcode(Character.getNumericValue(combo.charAt(i)));
+	boolean a = isCode(code);	
+	for (int i = 1; i < code.length(); i+5) {
+	    while (!toBarcode(j).equals(code.substring(i,i+5)) && j < 10) {
+		j++;
+	    }
+	    if (j < 10) {
+		ans += j;
+	    }
+	    else {
+		throw new IllegalArgumentException("Invalid code. Please insert a proper code.");
 	}
 	return ans;
     }
