@@ -14,7 +14,7 @@ public class Barcode implements Comparable<Barcode>{
       }
       else {
 	  _zip = zip;
-	  _checkDigit = checkSum();
+	  _checkDigit = checkSum(this);
       }
   }
 
@@ -28,17 +28,17 @@ public class Barcode implements Comparable<Barcode>{
   }
  	      
 // postcondition: Creates a copy of a bar code.
-  public Barcode clone(){
-      Barcode barcode = new Barcode(_zip);
-      return barcode;
-  }
+//  public Barcode clone(){
+    //    Barcode barcode = new Barcode(_zip);
+    //return barcode;
+    //}
 
 
 // postcondition: computes and returns the check sum for _zip
-  private int checkSum(){
+  private static int checkSum(Barcode barcode){
       int ans = 0;
-      for (int i = 0; i < _zip.length(); i++) {
-	  ans += Character.getNumericValue(_zip.charAt(i));
+      for (int i = 0; i < barcode._zip.length(); i++) {
+	  ans += Character.getNumericValue(barcode._zip.charAt(i));
       }
       return ans%10;
   }
@@ -46,15 +46,21 @@ public class Barcode implements Comparable<Barcode>{
 //postcondition: format zip + check digit + Barcode 
 //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
   public String toString(){
-      String ans = _zip + _checkDigit + "  |";
-      String ansInitialCopy = ans;
-      for (int i = 0; i < ansInitialCopy.length()-2; i++) {
-	  ans += translate(Character.getNumericValue(ansInitialCopy.charAt(i)));
-      }
-      return ans + "|";
+      String ans = _zip + _checkDigit + "  |" + toZip(this) + "|";
+      return ans;
   }
+    
+    private static String toZip(Barcode barcode) {
+	String ans = "";
+	String combo = barcode._zip + barcode._checkDigit;
+	for (int i = 0; i < combo.length(); i++) {
+	    ans += toBarcode(Character.getNumericValue(combo.charAt(i)));
+	}
+	return ans;
+    }
+	
 
-  public String translate(int digit) {
+    private static String toBarcode(int digit) {
       String translation = "";
       switch (digit) {
       case 0:  translation += "||:::";
@@ -86,22 +92,14 @@ public class Barcode implements Comparable<Barcode>{
   public int compareTo(Barcode other){
       return (_zip+_checkDigit).compareTo(other._zip+other._checkDigit);
   }
-  public static void main(String[] args) {
-	Barcode a = new Barcode("10282");
+    public static void main(String[] args) {
+	/*Barcode a = new Barcode("10282");
 	System.out.println(a);
-	Barcode b = a.clone();
-	System.out.println(b);
-	System.out.println(a.compareTo(b));
 	Barcode c = new Barcode("01234");
 	System.out.println(c);
-	Barcode d = c.clone();
-	System.out.println(d);
-	System.out.println(c.compareTo(d));
 	System.out.println(a.compareTo(c));
-	System.out.println(c.compareTo(b));/*
 	//Barcode e = new Barcode("143442");
 	//Barcode f = new Barcode("14");
-	//Barcode g = new Barcode("hello");
-	*/
-    }
+	//Barcode g = new Barcode("hello");*/
+	}
 }
