@@ -21,19 +21,34 @@ public class Sorts {
 	    }
 	}
     }
-    /*public static void main(String[] args) {
+    public static void InsertionSort(int[] data) {
+	int j;
+	for (int i = 1; i < data.length; i++) {
+	    j = i-1;
+	    while (data[j] > data[i] && j > 0) {
+		j--;
+	    }
+	    if (j >= 0) {
+	       swap(data,i,j);
+	    }
+	}
+    }
+	    //for (int i = data.length-1; i > 1; i--) {
+	//  for (int j = i-1; j > 0; j--) {
+	//	if (
+    public static void main(String[] args) {
 	int[] a = {6,3,1,7,5,9,4,0,2};
-	SelectionSort(a);
+	InsertionSort(a);
 	System.out.println(Arrays.toString(a));
 	int[] b = {};
-	SelectionSort(b);
+	InsertionSort(b);
 	System.out.println(Arrays.toString(b));
 	int[] c = {10};
-	SelectionSort(c);
+	InsertionSort(c);
 	System.out.println(Arrays.toString(c));
 	int[] d = {400,303,1500,1759,1618,13,11,1436,2168,1172,5280,2016,38387};
-	SelectionSort(d);
+	InsertionSort(d);
 	System.out.println(Arrays.toString(d));
-	}*/
+    }
 }
 	  
