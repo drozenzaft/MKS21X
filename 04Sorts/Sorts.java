@@ -21,34 +21,53 @@ public class Sorts {
 	    }
 	}
     }
-    public static void InsertionSort(int[] data) {
-	int j;
-	for (int i = 1; i < data.length; i++) {
-	    j = i-1;
-	    while (data[j] > data[i] && j > 0) {
-		j--;
+    public static void insert(int[] data, int insertThis, int putHere) {
+	if (insertThis < putHere) {
+	    for (int j = putHere; j >= insertThis; j--) {
+		swap(data,j,putHere);
 	    }
-	    if (j >= 0) {
-	       swap(data,i,j);
+	}
+	else {
+	    for (int i = insertThis-1; i >= putHere; i--) {
+		swap(data,i,i+1);
 	    }
 	}
     }
-	    //for (int i = data.length-1; i > 1; i--) {
-	//  for (int j = i-1; j > 0; j--) {
-	//	if (
+    public static void InsertionSort(int[] data) {
+	//System.out.println(0+","+Arrays.toString(data));
+	int j;
+	for (int i = 1; i < data.length; i++) {
+	    j = i-1;
+	    while (j > 0 && data[i] < data[j]) {
+		j--;
+	    }
+	    if (j > 0) {
+		j++;
+	    }
+	    if (j > 0 || data[i] < data[j] && (j != i-1 || i == 1)) {
+		insert(data,i,j);
+	    }
+	    //System.out.println(i+","+data[i]+","+data[j]);
+	    //System.out.println(i+","+j+","+Arrays.toString(data));
+	}
+    }
     public static void main(String[] args) {
-	int[] a = {6,3,1,7,5,9,4,0,2};
-	InsertionSort(a);
-	System.out.println(Arrays.toString(a));
-	int[] b = {};
-	InsertionSort(b);
-	System.out.println(Arrays.toString(b));
-	int[] c = {10};
-	InsertionSort(c);
-	System.out.println(Arrays.toString(c));
-	int[] d = {400,303,1500,1759,1618,13,11,1436,2168,1172,5280,2016,38387};
-	InsertionSort(d);
-	System.out.println(Arrays.toString(d));
+	//int[] a = {6,3,1,7,5,9,4,0,2};
+	//insert(a,3,7);
+	//System.out.println(Arrays.toString(a));
+	//insert(a,7,3);
+	//System.out.println(Arrays.toString(a));
+	//InsertionSort(a);
+	//System.out.println(Arrays.toString(a));
+	//int[] b = {};
+	//InsertionSort(b);
+	//System.out.println(Arrays.toString(b));
+	//int[] c = {10};
+	//InsertionSort(c);
+	//System.out.println(Arrays.toString(c));
+	//int[] d = {400,303,1500,1759,1618,13,11,1436,2168,1172,5280,2016,38387};
+	//InsertionSort(d);
+	//System.out.println(Arrays.toString(d));
     }
 }
 	  
