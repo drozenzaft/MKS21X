@@ -51,23 +51,50 @@ public class Sorts {
 	    //System.out.println(i+","+j+","+Arrays.toString(data));
 	}
     }
+    public static void BubbleSort(int[] data) {
+	int i = 0;
+	boolean swapped = true;
+	while (i < data.length-1 && swapped) {
+	    swapped = false;
+	    for (int j = i+1; j < data.length; j++) {
+		if (data[i] > data[j]) {
+		    swap(data,i,j);
+		    swapped = true;
+		}
+	    }
+	    i++;
+	}
+    }
     public static void main(String[] args) {
-	//int[] a = {6,3,1,7,5,9,4,0,2};
+	double[] zStore = new double[10000];
+	double[] z = new double[10000];
+	double num;
+	for (int i = 0; i < 10000; i++) {
+	    num = Math.random() * 10000;
+	    zStore[i] = num;
+	    z[i] = num;
+	}
+	int[] y = SelectionSort(z);
+	/*int[] a = {6,3,1,7,5,9,4,0,2};
 	//insert(a,3,7);
-	//System.out.println(Arrays.toString(a));
+	bubbleSort(a);
+	System.out.println(Arrays.toString(a));
 	//insert(a,7,3);
 	//System.out.println(Arrays.toString(a));
 	//InsertionSort(a);
 	//System.out.println(Arrays.toString(a));
-	//int[] b = {};
+	int[] b = {};
 	//InsertionSort(b);
-	//System.out.println(Arrays.toString(b));
-	//int[] c = {10};
+	bubbleSort(b);
+	System.out.println(Arrays.toString(b));
+	int[] c = {10};
 	//InsertionSort(c);
-	//System.out.println(Arrays.toString(c));
-	//int[] d = {400,303,1500,1759,1618,13,11,1436,2168,1172,5280,2016,38387};
+	bubbleSort(c);
+	System.out.println(Arrays.toString(c));
+	int[] d = {400,303,1500,1759,1618,13,11,1436,2168,1172,5280,2016,38387};
 	//InsertionSort(d);
-	//System.out.println(Arrays.toString(d));
+	bubbleSort(d);
+	System.out.println(Arrays.toString(d));*/
     }
 }
 	  
