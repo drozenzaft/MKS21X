@@ -10,15 +10,24 @@ public class Sorts {
 	array[b] = temp;
     }
     public static void SelectionSort(int[] data) {
-	int temp;
+	int temp,i,ind;
 	double time = System.currentTimeMillis();
      	for (int a = 0; a < data.length-1; a++) {
-	    for (int i = a+1; i < data.length; i++) {
+	    i = a+1;
+	    temp = data[a];
+	    ind = a;
+	    /* for (int i = a+1; i < data.length; i++) {
 		if (data[i] < data[a]) {
 		    temp = data[i];
-		    swap(data,a,i);
+		    }*/
+	    while (i < data.length-1) {
+		if (temp > data[i]) {
+		    temp = data[i];
+		    ind = i;
 		}
+		i++;
 	    }
+	    swap(data,a,ind);
 	}
 	double deltaT = (System.currentTimeMillis() - time)/1000.0;
 	System.out.println("SelectionSort Time: " + deltaT + " seconds");
@@ -46,7 +55,7 @@ public class Sorts {
 		}
 		if (data[i] < data[j+1]) {
 		    if (j >= 0) {
-						 insert(data,i,j+1);
+			insert(data,i,j+1);
 		    }
 		    else {
 			insert(data,i,0);
@@ -73,29 +82,30 @@ public class Sorts {
 	    i++;
 	}
 	double deltaT = (System.currentTimeMillis() - time)/1000.0;
-    System.out.println("BubbleSort Time: " + deltaT + " seconds");
+	System.out.println("BubbleSort Time: " + deltaT + " seconds");
     }
     public static void main(String[] args) {
-	int[] z = new int[80000];
-	int[] y = new int[80000];
-	int[] x = new int[80000];
+	int[] z = new int[40000];
+	int[] y = new int[40000];
+	int[] x = new int[40000];
 	int num;
       	for (int i = 0; i < z.length; i++) {
-	    num = (int)(Math.random() * 80000);
+	    num = (int)(Math.random() * z.length);
 	    // if (i < 20) {
-	    //		System.out.println(num);
-	    //}
+	    //	System.out.println(num);
+	    // }
 	    x[i] = num;
 	    y[i] = num;
 	    z[i] = num;
 	}
+	//System.out.println(Arrays.toString(z));
 	SelectionSort(z);
-	//System.out.println(Arrays.toString(Arrays.copyOfRange(z,0,100)));
+	System.out.println(Arrays.toString(Arrays.copyOfRange(z,0,100)));
 	InsertionSort(y);
-	//System.out.println(Arrays.toString(Arrays.copyOfRange(y,0,100)));
+	System.out.println(Arrays.toString(Arrays.copyOfRange(y,0,100)));
 	BubbleSort(x);
-	//System.out.println(Arrays.toString(Arrays.copyOfRange(x,0,100)));
-	System.out.println(Arrays.equals(z,y)&&Arrays.equals(z,x)); 
+	System.out.println(Arrays.toString(Arrays.copyOfRange(x,0,100)));
+	//System.out.println(Arrays.equals(z,y)&&Arrays.equals(z,x)); 
     }
 }
 	  
