@@ -16,10 +16,6 @@ public class Sorts {
 	    i = a+1;
 	    temp = data[a];
 	    ind = a;
-	    /* for (int i = a+1; i < data.length; i++) {
-		if (data[i] < data[a]) {
-		    temp = data[i];
-		    }*/
 	    while (i < data.length-1) {
 		if (temp > data[i]) {
 		    temp = data[i];
@@ -33,14 +29,11 @@ public class Sorts {
 	System.out.println("SelectionSort Time: " + deltaT + " seconds");
     }
     public static void insert(int[] data, int insertThis, int putHere) {
+	int put = data[insertThis];
+	int j = putHere;
 	if (insertThis < putHere) {
-	    for (int j = putHere; j >= insertThis; j--) {
-		swap(data,j,putHere);
-	    }
-	}
-	else {
-	    for (int i = insertThis-1; i >= putHere; i--) {
-		swap(data,i,i+1);
+	    while (data[j] >= insertThis) {
+		j--;
 	    }
 	}
     }
@@ -85,27 +78,22 @@ public class Sorts {
 	System.out.println("BubbleSort Time: " + deltaT + " seconds");
     }
     public static void main(String[] args) {
-	int[] z = new int[40000];
-	int[] y = new int[40000];
-	int[] x = new int[40000];
+	int[] z = new int[80000];
+	int[] y = new int[80000];
+	int[] x = new int[80000];
 	int num;
-      	for (int i = 0; i < z.length; i++) {
-	    num = (int)(Math.random() * z.length);
-	    // if (i < 20) {
-	    //	System.out.println(num);
-	    // }
+      	for (int i = 0; i < 80000; i++) {
+	    num = (int)(Math.random() * 80000);
 	    x[i] = num;
-	    y[i] = num;
-	    z[i] = num;
 	}
 	//System.out.println(Arrays.toString(z));
-	SelectionSort(z);
-	System.out.println(Arrays.toString(Arrays.copyOfRange(z,0,100)));
-	InsertionSort(y);
-	System.out.println(Arrays.toString(Arrays.copyOfRange(y,0,100)));
-	BubbleSort(x);
+	InsertionSort(x);
 	System.out.println(Arrays.toString(Arrays.copyOfRange(x,0,100)));
-	//System.out.println(Arrays.equals(z,y)&&Arrays.equals(z,x)); 
+	//InsertionSort(y);
+	//	System.out.println(Arrays.toString(Arrays.copyOfRange(y,0,100)));
+	//BubbleSort(x);
+	//System.out.println(Arrays.toString(Arrays.copyOfRange(x,0,100)));
+	//	System.out.println(Arrays.equals(z,y)&&Arrays.equals(z,x)); 
     }
 }
 	  
