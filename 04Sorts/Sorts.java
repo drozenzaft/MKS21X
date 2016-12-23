@@ -16,7 +16,7 @@ public class Sorts {
 	    i = a+1;
 	    temp = data[a];
 	    ind = a;
-	    while (i < data.length-1) {
+	    while (i < data.length) {
 		if (temp > data[i]) {
 		    temp = data[i];
 		    ind = i;
@@ -28,35 +28,31 @@ public class Sorts {
 	double deltaT = (System.currentTimeMillis() - time)/1000.0;
 	System.out.println("SelectionSort Time: " + deltaT + " seconds");
     }
-    public static void insert(int[] data, int insertThis, int putHere) {
-	int put = data[insertThis];
-	int j = putHere;
-	if (insertThis < putHere) {
-	    while (data[j] >= insertThis) {
-		j--;
-	    }
+    public static void insert(int[] data, int moveEnd, int moveHere) {
+	int temp = data[moveHere];
+	int placeHolder;
+	for (int i = moveHere+1; i <= moveEnd; i++) {
+	    placeHolder = data[i];
+	    data[i] = temp;
+	    temp = placeHolder;	    
 	}
+	data[moveHere] = temp;
     }
     public static void InsertionSort(int[] data) {
 	double time = System.currentTimeMillis();
 	int j;
 	for (int i = 1; i < data.length; i++) {
-	    j=i-1;
-	    if (data[i] < data[i-1]) {
-		while (j >= 0 && data[i] < data[j]) {
-		    j--;
-		}
-		if (data[i] < data[j+1]) {
-		    if (j >= 0) {
-			insert(data,i,j+1);
-		    }
-		    else {
-			insert(data,i,0);
-		    }
-		}
+	    j = i-1;
+	    while (j >= 0 && data[i] < data[j]) {
+		j--;
+	    }
+	    if (j > -1) {
+		insert(data,i,j+1);
+	    }
+	    else {
+		insert(data,i,0);
 	    }
 	}
-	//System.out.println(i + ": " +Arrays.toString(data));
 	double deltaT = (System.currentTimeMillis() - time)/1000.0;
 	System.out.println("InsertionSort Time: " + deltaT + " seconds");
     }
@@ -77,23 +73,34 @@ public class Sorts {
 	double deltaT = (System.currentTimeMillis() - time)/1000.0;
 	System.out.println("BubbleSort Time: " + deltaT + " seconds");
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 	int[] z = new int[80000];
 	int[] y = new int[80000];
 	int[] x = new int[80000];
 	int num;
-      	for (int i = 0; i < 80000; i++) {
-	    num = (int)(Math.random() * 80000);
+      	for (int i = 0; i < z.length; i++) {
+	    num = (int)(Math.random() * z.length);
 	    x[i] = num;
+	    y[i] = num;
+	    z[i] = num;
 	}
-	//System.out.println(Arrays.toString(z));
-	InsertionSort(x);
+	SelectionSort(x);
 	System.out.println(Arrays.toString(Arrays.copyOfRange(x,0,100)));
-	//InsertionSort(y);
-	//	System.out.println(Arrays.toString(Arrays.copyOfRange(y,0,100)));
-	//BubbleSort(x);
-	//System.out.println(Arrays.toString(Arrays.copyOfRange(x,0,100)));
-	//	System.out.println(Arrays.equals(z,y)&&Arrays.equals(z,x)); 
-    }
+	InsertionSort(y);
+	System.out.println(Arrays.toString(Arrays.copyOfRange(y,0,100)));
+	BubbleSort(z);
+	System.out.println(Arrays.toString(Arrays.copyOfRange(z,0,100)));
+	//----------------------EMPTY ARRAY TESTS-----------------------
+	int[] w = {};
+	int[] v = {};
+	int[] u = {};
+	SelectionSort(w);
+	System.out.println(Arrays.toString(w));
+	InsertionSort(v);
+	System.out.println(Arrays.toString(v));
+	BubbleSort(u);
+	System.out.println(Arrays.toString(u));
+	System.out.println(Arrays.equals(z,x)&&(Arrays.equals(y,x))); 
+    }*/
 }
 	  
